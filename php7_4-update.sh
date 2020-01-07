@@ -152,7 +152,7 @@ if [ "$RESPONSE" = "y" ]; then
   ln -s /opt/php-build-config/php7_4-fpm "$INIT_SCRIPT"
 
   cd php-${VERSION}/lib/
-  ln -s ../../../php-build-config/php7.ini .
+  ln -s ../../../php-build-config/php7.ini php.ini
   cd ..
   cd ..
 
