@@ -8,6 +8,15 @@ then
 fi
 cd php-7.4
 
+### WORKFLOW: UPDATE DEPENDENCIES ###
+read -p "Update build package dependencies? (y/n)?" RESPONSE
+if [ "$RESPONSE" = "y" ]; then
+
+  apt-get update
+  # PHP7 needed, here are only the additional packages listed
+  apt-get install libsqlite3-dev libonig-dev
+fi
+
 ### WORKFLOW: ASK VERSION ###
 VERSION=
 while [ -z $VERSION ]

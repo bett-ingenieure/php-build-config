@@ -8,6 +8,14 @@ then
 fi
 cd php-7
 
+### WORKFLOW: UPDATE DEPENDENCIES ###
+read -p "Update build package dependencies? (y/n)?" RESPONSE
+if [ "$RESPONSE" = "y" ]; then
+
+  apt-get update
+  apt-get install g++ libzip-dev autoconf libfcgi-dev libfcgi0ldbl libjpeg62-turbo-dev libmcrypt-dev libssl-dev libc-client2007e libc-client2007e-dev libxml2-dev libbz2-dev libcurl4-openssl-dev libjpeg-dev libpng-dev libfreetype6-dev libkrb5-dev libpq-dev libxml2-dev libxslt1-dev libmagickwand-dev
+fi
+
 ### WORKFLOW: ASK VERSION ###
 VERSION=
 while [ -z $VERSION ]
