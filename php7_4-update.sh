@@ -2,7 +2,8 @@
 
 # go to "php-7": the working directory
 cd ..
-if [ -e "php-7.4" ]
+if [ ! -e "php-7.4" ]
+then
   mkdir "php-7.4"
 fi
 cd php-7.4
@@ -139,7 +140,7 @@ if [ "$RESPONSE" = "y" ]; then
     rm "$INIT_SCRIPT"
   fi
 
-  ln -s ../php-build-config/php7-fpm "$INIT_SCRIPT"
+  ln -s ../php-build-config/php7_4-fpm "$INIT_SCRIPT"
 
   cd php-${VERSION}/lib/
   ln -s ../../../php-build-config/php7.ini .

@@ -2,7 +2,8 @@
 
 # go to "php-7": the working directory
 cd ..
-if [ -e "php-7" ]
+if [ ! -e "php-7" ]
+then
   mkdir "php-7"
 fi
 cd php-7
