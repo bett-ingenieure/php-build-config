@@ -145,7 +145,7 @@ if [ "$RESPONSE" = "y" ]; then
     rm "$INIT_SCRIPT"
   fi
 
-  ln -s ../php-build-config/php7-fpm "$INIT_SCRIPT"
+  ln -s /opt/php-build-config/php7-fpm "$INIT_SCRIPT"
 
   cd php-${VERSION}/lib/
   ln -s ../../../php-build-config/php7.ini .
