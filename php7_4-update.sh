@@ -54,6 +54,7 @@ if [ "$RESPONSE" = "y" ]; then
   --enable-calendar \
   --with-curl \
   --enable-gd \
+  --with-freetype \
   --disable-rpath \
   --enable-inline-optimization \
   --with-bz2 \
