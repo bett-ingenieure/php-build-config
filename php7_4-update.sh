@@ -14,7 +14,7 @@ if [ "$RESPONSE" = "y" ]; then
 
   apt-get update
   # PHP7 needed, here are only the additional packages listed
-  apt-get install libsqlite3-dev libonig-dev
+  apt-get install libsqlite3-dev libonig-dev libwebp-dev libxpm-dev
 fi
 
 ### WORKFLOW: ASK VERSION ###
