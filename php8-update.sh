@@ -89,7 +89,7 @@ if [ "$RESPONSE" = "y" ]; then
   --enable-bcmath \
   --enable-exif \
   --enable-shmop \
-  --enable-sysvmsg \
+  --enable-sysvmsg
 
   cd ..
 fi
@@ -125,6 +125,18 @@ if [ "$RESPONSE" = "y" ]; then
   sleep 2s
   ./pecl install imagick
 
+  ###
+  ### IMAGICK is not compatible (27.11.2020) while installing 3.4.4:
+  ### /tmp/pear/temp/imagick/imagick_file.c:313:112: error: expected ‘;’, ‘,’ or ‘)’ before ‘TSRMLS_DC’
+  ###  zend_bool php_imagick_stream_handler(php_imagick_object *intern, php_stream *stream, ImagickOperationType type TSRMLS_DC)
+  ###                                                                                                                ^~~~~~~~~
+  ### make: *** [Makefile:209: imagick_file.lo] Fehler 1
+  ###
+  ### Fetching master from github?
+
+  ### Same for "apcu_bc-beta"
+  ###
+
   echo Will install apcu...
   sleep 2s
   ./pecl install apcu
@@ -152,6 +164,7 @@ if [ "$RESPONSE" = "y" ]; then
   fi
 
   ln -s /opt/php-build-config/php8-fpm "$INIT_SCRIPT"
+  chmod +x /opt/php-build-config/php8-fpm
 
   cd php-${VERSION}/lib/
   ln -s ../../../php-build-config/php8.ini php.ini
