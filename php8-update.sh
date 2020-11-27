@@ -90,7 +90,6 @@ if [ "$RESPONSE" = "y" ]; then
   --enable-exif \
   --enable-shmop \
   --enable-sysvmsg \
-  --with-xmlrpc
 
   cd ..
 fi
