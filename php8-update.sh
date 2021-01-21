@@ -16,6 +16,7 @@ if [ "$RESPONSE" = "y" ]; then
   apt-get update
   # Copied from PHP7 + PHP7.4
   apt-get install g++ libzip-dev autoconf libfcgi-dev libfcgi0ldbl libjpeg62-turbo-dev libmcrypt-dev libssl-dev libc-client2007e libc-client2007e-dev libxml2-dev libbz2-dev libcurl4-openssl-dev libjpeg-dev libpng-dev libfreetype6-dev libkrb5-dev libpq-dev libxml2-dev libxslt1-dev libmagickwand-dev libsqlite3-dev libonig-dev libwebp-dev libxpm-dev
+  apt-get install git
   ln -s /usr/lib/libc-client.a /usr/lib/x86_64-linux-gnu/libc-client.a
 fi
 
@@ -123,10 +124,23 @@ if [ "$RESPONSE" = "y" ]; then
 
   echo Will install imagick...
   sleep 2s
-  ./pecl install imagick
+
+  mkdir ../src
+  mkdir ../src/imagick
+  cd ../src/imagick/
+  git clone https://github.com/Imagick/imagick .
+  ../../bin/phpize
+  ./configure --with-php-config=../../bin/php-config
+  make
+  make install
+
+  cd ../../bin
+
 
   ###
-  ### IMAGICK is not compatible (27.11.2020) while installing 3.4.4:
+  ### ./pecl install imagick
+  ###
+  ### PECL IMAGICK is not compatible (27.11.2020) while installing 3.4.4:
   ### /tmp/pear/temp/imagick/imagick_file.c:313:112: error: expected ‘;’, ‘,’ or ‘)’ before ‘TSRMLS_DC’
   ###  zend_bool php_imagick_stream_handler(php_imagick_object *intern, php_stream *stream, ImagickOperationType type TSRMLS_DC)
   ###                                                                                                                ^~~~~~~~~
@@ -140,7 +154,11 @@ if [ "$RESPONSE" = "y" ]; then
   echo Will install apcu...
   sleep 2s
   ./pecl install apcu
-  ./pecl install apcu_bc-beta
+
+  ###
+  ### // TODO Not available for PHP8 (21.01.2021) - needed?
+  ### ./pecl install apcu_bc-beta
+  ###
 
   echo Will install redis...
   sleep 2s
