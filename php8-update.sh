@@ -155,11 +155,6 @@ if [ "$RESPONSE" = "y" ]; then
   sleep 2s
   ./pecl install apcu
 
-  ###
-  ### // TODO Not available for PHP8 (21.01.2021) - needed?
-  ### ./pecl install apcu_bc-beta
-  ###
-
   echo Will install redis...
   sleep 2s
   ./pecl install redis
