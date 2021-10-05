@@ -59,7 +59,6 @@ if [ "$RESPONSE" = "y" ]; then
   --enable-gd \
   --with-freetype \
   --disable-rpath \
-  --enable-inline-optimization \
   --with-bz2 \
   --with-zlib \
   --with-zip \
@@ -125,17 +124,7 @@ if [ "$RESPONSE" = "y" ]; then
   echo Will install imagick...
   sleep 2s
 
-  mkdir ../src
-  mkdir ../src/imagick
-  cd ../src/imagick/
-  git clone https://github.com/Imagick/imagick .
-  ../../bin/phpize
-  ./configure --with-php-config=../../bin/php-config
-  make
-  make install
-
-  cd ../../bin
-
+  ./pecl install imagick
 
   ###
   ### ./pecl install imagick
