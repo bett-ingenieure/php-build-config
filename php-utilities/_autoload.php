@@ -13,5 +13,5 @@ spl_autoload_register(function($class) {
 
     $classInNamespace = substr($class, strlen(__NAMESPACE__)+1);
 
-    require str_replace('\\', DIRECTORY_SEPARATOR, $classInNamespace) . '.php';
+    require __DIR__ . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $classInNamespace) . '.php';
 });
