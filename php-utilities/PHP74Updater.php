@@ -99,7 +99,7 @@ class PHP74Updater {
         // Update Dependencies
         $this->system->exec('apt-get update');
         // Copied from PHP7 + PHP7.4
-        $this->system->exec('apt-get install libsqlite3-dev libonig-dev libwebp-dev libxpm-dev');
+        $this->system->exec('apt-get install -y pkg-config libsqlite3-dev libonig-dev libwebp-dev libxpm-dev');
     }
 
     /**
