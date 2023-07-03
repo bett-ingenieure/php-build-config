@@ -48,7 +48,7 @@ class System {
             $expectedReturnVar = 0;
         }
 
-        $cmd = 'timeout 1h ' . $cmd . ' 2>&1';
+        $cmd = 'DEBIAN_FRONTEND=noninteractive timeout 1h ' . $cmd . ' 2>&1';
 
         if($this->verbose) {
             echo 'CMD: ' . $cmd . PHP_EOL;
