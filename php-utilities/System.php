@@ -70,9 +70,11 @@ class System {
 
         if($return_var !== $expectedReturnVar) {
 
-            $message = 'Unexpected return var ' .
-                var_export($return_var, true) .
-                ' while executing: ' . $cmd;
+            $message = 'Unexpected return var ' . var_export($return_var, true) . ' while executing: ' . PHP_EOL .
+                $cmd . PHP_EOL .
+                'Output: ' . PHP_EOL .
+                var_export($output, true)
+            ;
 
             if($this->log) {
                 $this->log->write($message . ' -> stopped');
