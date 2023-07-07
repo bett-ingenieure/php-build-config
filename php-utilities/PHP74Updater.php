@@ -99,7 +99,12 @@ class PHP74Updater {
         // Update Dependencies
         $this->system->exec('apt-get update');
         // Copied from PHP7 + PHP7.4
-        $this->system->exec('apt-get install -y pkg-config libsqlite3-dev libonig-dev libwebp-dev libxpm-dev');
+        $this->system->exec('apt-get install -y make autoconf pkg-config libsqlite3-dev libonig-dev libwebp-dev libxpm-dev libxml2-dev libc-client-dev libkrb5-dev libssl-dev libzip-dev libbz2-dev libcurl4-openssl-dev libjpeg-dev libpng-dev libfreetype6-dev libmagickwand-dev');
+
+        $this->system->exec('apt-get install -y git');
+        if(!file_exists('/usr/lib/x86_64-linux-gnu/libc-client.a')) {
+            $this->system->exec('ln -s /usr/lib/libc-client.a /usr/lib/x86_64-linux-gnu/libc-client.a');
+        }
     }
 
     /**
