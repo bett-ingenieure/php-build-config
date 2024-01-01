@@ -1,34 +1,7 @@
 <?php
 namespace BettIngenieure\PhpBuildConfig;
 
-class PHP8Updater {
-
-    /**
-     * @var Log
-     */
-    protected $log;
-
-    /**
-     * @var System
-     */
-    protected $system;
-
-    protected $subDir;
-    protected $repositoryDir;
-
-    public function __construct(Log $log) {
-
-        $this->log = $log;
-        
-        $this->system = new System();
-        $this->system->setLogger($log);
-        // $this->system->setVerbose(true);
-
-        $rootDir = dirname(__FILE__, 3) . DIRECTORY_SEPARATOR;
-        $this->subDir = $rootDir . $this->getSubDirName() . DIRECTORY_SEPARATOR;
-
-        $this->repositoryDir = dirname(__FILE__, 2) . DIRECTORY_SEPARATOR;
-    }
+class PHP8Updater extends PHPUpdater {
 
     /**
      * Should be something like php-8, php-80, php-81.
@@ -52,42 +25,8 @@ class PHP8Updater {
         return 'php-8.0';
     }
 
-    /**
-     * @return void
-     */
-    protected function start() {
-
-        putenv('DEBIAN_FRONTEND=noninteractive');
-
-        $this->log->write('Start: ' . date("d.m.Y H:i:s") . PHP_EOL);
-    }
-
-    /**
-     * @return void
-     * @throws ExceptionExec
-     */
-    public function execute() {
-
-        $this->start();
-
-        $this->updateDependencies();
-
-        if(!file_exists($this->subDir)) {
-            mkdir($this->subDir, 0755, true);
-        }
-
-        // Download
-        if(($version = $this->download()) === null) {
-            // Target does already exist - there is no update
-            $this->log->write('Target does already exist - exiting');
-            return;
-        }
-
-        $this->install($version);
-        $this->installExtensions($version);
-        $this->activate($version);
-
-        $this->end();
+    protected function getPHPININame() {
+        return 'php8';
     }
 
     /**
@@ -105,37 +44,6 @@ class PHP8Updater {
         if(!file_exists('/usr/lib/x86_64-linux-gnu/libc-client.a')) {
             $this->system->exec('ln -s /usr/lib/libc-client.a /usr/lib/x86_64-linux-gnu/libc-client.a');
         }
-    }
-
-    /**
-     * @return string|null
-     * @throws ExceptionExec
-     */
-    protected function download() {
-
-        chdir($this->subDir);
-
-        if(file_exists($this->subDir . 'download')) {
-            unlink($this->subDir . 'download');
-        }
-        $this->system->exec('wget -O download https://config.bett-ingenieure.de/getLatestVersion?target=' . $this->getVersion() . '.tar.gz');
-
-        $output = $this->system->exec('tar -tzf download 2>&1 | head -1 | cut -f1 -d"/"');
-        $target = $output[0];
-        if(preg_match('/php-\d+\.\d+\.\d+/', $target) !== 1) {
-            throw new \RuntimeException('Invalid target folder match: ' . var_export($output, true));
-        }
-
-        if(file_exists($this->subDir . $target)) {
-            return null; // Target does already exist - there is no update
-            //$this->system->exec('rm -R ' . $subDir . $target);
-        }
-
-        $this->system->exec('tar xfvz download');
-        $this->system->exec('chown -R root:root ' . $this->subDir . $target);
-        unlink($this->subDir . 'download');
-
-        return $target;
     }
 
     /**
@@ -205,43 +113,6 @@ class PHP8Updater {
         $this->system->exec("yes '' 2>&1 | ./pecl install imagick");
         $this->system->exec("yes '' 2>&1 | ./pecl install apcu");
         $this->system->exec("yes '' 2>&1 | ./pecl install redis");
-    }
-
-    /**
-     * @param string $version
-     * @return void
-     * @throws ExceptionExec
-     */
-    protected function activate(string $version) {
-
-        chdir($this->subDir . $version);
-
-        $initScript = '/etc/init.d/' . $this->getFpmName() . '-fpm';
-
-        if(file_exists($initScript) || is_link($initScript)) {
-            try { $this->system->exec($initScript . ' stop'); } catch(\BettIngenieure\PhpBuildConfig\ExceptionExec $e) {}
-            $this->system->exec('rm ' . escapeshellarg($initScript));
-        }
-
-        $this->system->exec('ln -s ' . escapeshellarg($this->repositoryDir . $this->getFpmName() . '-fpm') . ' ' . escapeshellarg($initScript));
-        $this->system->exec('chmod +x ' . escapeshellarg($this->repositoryDir . $this->getFpmName() . '-fpm'));
-
-        chdir($this->subDir . $version . '/lib');
-        $this->system->exec('ln -s ' . escapeshellarg($this->repositoryDir . 'php8.ini') . ' php.ini');
-
-        chdir($this->subDir);
-        if(file_exists($this->subDir . 'current-live') || is_link(file_exists($this->subDir . 'current-live'))) {
-            $this->system->exec('rm ' . escapeshellarg($this->subDir . 'current-live'));
-        }
-        $this->system->exec('ln -s ' . escapeshellarg($this->subDir . $version) . ' current-live');
-
-        try { $this->system->exec($initScript . ' start'); } catch(\BettIngenieure\PhpBuildConfig\ExceptionExec $e) {}
-    }
-
-    /**
-     * @return void
-     */
-    protected function end() {
-        $this->log->write(PHP_EOL . 'End: ' . date("d.m.Y H:i:s"));
+        $this->system->exec("yes '' 2>&1 | ./pecl install swoole");
     }
 }

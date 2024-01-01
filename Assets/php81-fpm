@@ -1,16 +1,16 @@
 #! /bin/sh
 ### BEGIN INIT INFO
-# Provides:          php7_4-fpm
+# Provides:          php81-fpm
 # Required-Start:    $all
 # Required-Stop:     $all
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: starts php7_4-fpm
+# Short-Description: starts php81-fpm
 # Description:       starts the PHP FastCGI Process Manager daemon
 ### END INIT INFO
-php_fpm_BIN=/opt/php-7.4/current-live/sbin/php-fpm
-php_fpm_CONF=/opt/php-build-config/php7_4-fpm.conf
-php_fpm_PID=/var/run/php7_4-fpm.pid
+php_fpm_BIN=/opt/php-81/current-live/sbin/php-fpm
+php_fpm_CONF=/opt/php-build-config/Assets/php81-fpm.conf
+php_fpm_PID=/var/run/php81-fpm.pid
 php_opts="--fpm-config $php_fpm_CONF"
 wait_for_pid () {
         try=0
@@ -87,7 +87,7 @@ case "$1" in
         ;;
 	status)
                 . /lib/lsb/init-functions
-                status_of_proc -p $php_fpm_PID "php7_4-fpm" "$NAME"
+                status_of_proc -p $php_fpm_PID "php81-fpm" "$NAME"
                 exit $?
         ;;
         reload)

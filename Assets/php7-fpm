@@ -9,7 +9,7 @@
 # Description:       starts the PHP FastCGI Process Manager daemon
 ### END INIT INFO
 php_fpm_BIN=/opt/php-7/current-live/sbin/php-fpm
-php_fpm_CONF=/opt/php-build-config/php7-fpm.conf
+php_fpm_CONF=/opt/php-build-config/Assets/php7-fpm.conf
 php_fpm_PID=/var/run/php7-fpm.pid
 php_opts="--fpm-config $php_fpm_CONF"
 wait_for_pid () {
