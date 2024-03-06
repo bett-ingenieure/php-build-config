@@ -41,9 +41,16 @@ class PHP8Updater extends PHPUpdater {
         $this->system->exec('apt-get install -y g++ pkg-config make libzip-dev autoconf libfcgi-dev libfcgi0ldbl libjpeg62-turbo-dev libmcrypt-dev libssl-dev libc-client2007e libc-client2007e-dev libxml2-dev libbz2-dev libcurl4-openssl-dev libjpeg-dev libpng-dev libfreetype6-dev libkrb5-dev libpq-dev libxml2-dev libxslt1-dev libmagickwand-dev libsqlite3-dev libonig-dev libwebp-dev libxpm-dev');
 
         $this->system->exec('apt-get install -y git');
-        if(!file_exists('/usr/lib/x86_64-linux-gnu/libc-client.a')) {
-            $this->system->exec('ln -s /usr/lib/libc-client.a /usr/lib/x86_64-linux-gnu/libc-client.a');
+
+        $multiarch = $this->getGccMultiarch();
+
+        if(!file_exists('/usr/lib/' . $multiarch . '/libc-client.a')) {
+            $this->system->exec('ln -s /usr/lib/libc-client.a /usr/lib/' . $multiarch . '/libc-client.a');
         }
+    }
+
+    private function getGccMultiarch() : string {
+        return $this->system->exec('gcc -print-multiarch')[0];
     }
 
     /**
@@ -83,7 +90,7 @@ class PHP8Updater extends PHPUpdater {
 --with-openssl \
 --with-fpm-user=www-data \
 --with-fpm-group=www-data \
---with-libdir=/lib/x86_64-linux-gnu \
+--with-libdir=/lib/' . $this->getGccMultiarch() . ' \
 --enable-ftp \
 --with-imap \
 --with-imap-ssl \
