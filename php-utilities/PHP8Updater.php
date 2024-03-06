@@ -120,6 +120,6 @@ class PHP8Updater extends PHPUpdater {
         $this->system->exec("yes '' 2>&1 | ./pecl install imagick");
         $this->system->exec("yes '' 2>&1 | ./pecl install apcu");
         $this->system->exec("yes '' 2>&1 | ./pecl install redis");
-        $this->system->exec("yes '' 2>&1 | ./pecl install swoole");
+        $this->system->exec("yes '' 2>&1 | ./pecl install --configureoptions 'enable-openssl=\"yes\"' swoole");
     }
 }
