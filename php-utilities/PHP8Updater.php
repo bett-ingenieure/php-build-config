@@ -117,9 +117,33 @@ class PHP8Updater extends PHPUpdater {
 
         chdir($this->subDir . $version . '/bin');
         $this->system->exec('./pecl -C ./pear.conf update-channels');
-        $this->system->exec("yes '' 2>&1 | ./pecl install imagick");
+
+        if($this->shouldBuildImagickExtensionFromSource()) {
+            $this->buildImagickExtensionFromSource($version);
+            chdir($this->subDir . $version . '/bin');
+        } else {
+            $this->system->exec("yes '' 2>&1 | ./pecl install imagick");
+        }
+
         $this->system->exec("yes '' 2>&1 | ./pecl install apcu");
         $this->system->exec("yes '' 2>&1 | ./pecl install redis");
         $this->system->exec("yes '' 2>&1 | ./pecl install --configureoptions 'enable-openssl=\"yes\"' swoole");
+    }
+
+    protected function shouldBuildImagickExtensionFromSource() : bool {
+        return false;
+    }
+
+    protected function buildImagickExtensionFromSource(string $version) {
+
+        mkdir($this->subDir . $version . '/ext/imagick');
+        $this->system->exec('curl -fsSL https://github.com/Imagick/imagick/archive/refs/heads/master.tar.gz | tar xvz -C "' . $this->subDir . $version . '/ext/imagick' . '" --strip 1');
+
+        chdir($this->subDir . $version . '/ext/imagick');
+
+        $this->system->exec($this->subDir . $version . '/bin/phpize');
+        $this->system->exec('./configure --with-php-config=' . $this->subDir . $version . '/bin/php-config');
+        $this->system->exec('make -j 4');
+        $this->system->exec('make install');
     }
 }

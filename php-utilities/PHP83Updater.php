@@ -14,4 +14,8 @@ class PHP83Updater extends PHP8Updater {
     protected function getVersion() {
         return 'php-8.3';
     }
+
+    protected function shouldBuildImagickExtensionFromSource() : bool {
+        return true;
+    }
 }
