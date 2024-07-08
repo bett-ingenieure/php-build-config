@@ -137,7 +137,7 @@ class PHP8Updater extends PHPUpdater {
     protected function buildImagickExtensionFromSource(string $version) {
 
         mkdir($this->subDir . $version . '/ext/imagick');
-        $this->system->exec('curl -fsSL https://github.com/Imagick/imagick/archive/refs/heads/master.tar.gz | tar xvz -C "' . $this->subDir . $version . '/ext/imagick' . '" --strip 1');
+        $this->system->exec('wget -qO- https://github.com/Imagick/imagick/archive/28f27044e435a2b203e32675e942eb8de620ee58.tar.gz | tar xvz -C "' . $this->subDir . $version . '/ext/imagick' . '" --strip 1');
 
         chdir($this->subDir . $version . '/ext/imagick');
 
