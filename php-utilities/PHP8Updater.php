@@ -1,29 +1,23 @@
 <?php
 namespace BettIngenieure\PhpBuildConfig;
 
-class PHP8Updater extends PHPUpdater {
+abstract class PHP8Updater extends PHPUpdater {
 
     /**
      * Should be something like php-8, php-80, php-81.
      *
      * @return string
      */
-    protected function getSubDirName() {
-        return 'php-8';
-    }
+    abstract protected function getSubDirName();
 
-    protected function getFpmName() {
-        return 'php8';
-    }
+    abstract protected function getFpmName();
 
     /**
      * Used to get download
      *
      * @return string
      */
-    protected function getVersion() {
-        return 'php-8.0';
-    }
+    abstract protected function getVersion();
 
     protected function getPHPININame() {
         return 'php8';
@@ -132,7 +126,11 @@ libxslt1-dev libmagickwand-dev libsqlite3-dev libonig-dev libwebp-dev libxpm-dev
 
         $this->system->exec("yes '' 2>&1 | ./pecl install apcu");
         $this->system->exec("yes '' 2>&1 | ./pecl install redis");
-        $this->system->exec("yes '' 2>&1 | ./pecl install --configureoptions 'enable-openssl=\"yes\"' swoole");
+        $this->system->exec("yes '' 2>&1 | ./pecl install --configureoptions 'enable-openssl=\"yes\"' " . $this->getPeclSwoolePackageName());
+    }
+
+    protected function getPeclSwoolePackageName() {
+        return 'swoole';
     }
 
     protected function shouldBuildImagickExtensionFromSource() : bool {
