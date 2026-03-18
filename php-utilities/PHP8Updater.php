@@ -39,12 +39,6 @@ libxslt1-dev libmagickwand-dev libsqlite3-dev libonig-dev libwebp-dev libxpm-dev
         );
 
         $this->system->exec('apt-get install -y git');
-
-        $multiarch = $this->getGccMultiarch();
-
-        if(!file_exists('/usr/lib/' . $multiarch . '/libc-client.a')) {
-            $this->system->exec('ln -s /usr/lib/libc-client.a /usr/lib/' . $multiarch . '/libc-client.a');
-        }
     }
 
     private function getGccMultiarch() : string {
