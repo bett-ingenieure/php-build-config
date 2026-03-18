@@ -131,6 +131,8 @@ libxslt1-dev libmagickwand-dev libsqlite3-dev libonig-dev libwebp-dev libxpm-dev
 
     protected function buildImagickExtensionFromSource(string $version) {
 
+        // This seems not compatible with PHP 8.4
+
         mkdir($this->subDir . $version . '/ext/imagick');
         $this->system->exec('wget -qO- https://github.com/Imagick/imagick/archive/28f27044e435a2b203e32675e942eb8de620ee58.tar.gz | tar xvz -C "' . $this->subDir . $version . '/ext/imagick' . '" --strip 1');
 
