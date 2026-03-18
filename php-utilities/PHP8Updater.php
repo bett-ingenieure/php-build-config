@@ -33,8 +33,8 @@ abstract class PHP8Updater extends PHPUpdater {
         $this->system->exec('apt-get update');
         // Copied from PHP7 + PHP7.4
         $this->system->exec('apt-get install -y \
-g++ pkg-config make libzip-dev autoconf libfcgi-dev libfcgi0ldbl libjpeg62-turbo-dev libmcrypt-dev libssl-dev libc-client2007e \
-libc-client2007e-dev libxml2-dev libbz2-dev libcurl4-openssl-dev libjpeg-dev libpng-dev libfreetype6-dev libkrb5-dev libpq-dev \
+g++ pkg-config make libzip-dev autoconf libfcgi-dev libfcgi0ldbl libjpeg62-turbo-dev libmcrypt-dev libssl-dev \
+libxml2-dev libbz2-dev libcurl4-openssl-dev libjpeg-dev libpng-dev libfreetype6-dev libkrb5-dev libpq-dev \
 libxslt1-dev libmagickwand-dev libsqlite3-dev libonig-dev libwebp-dev libxpm-dev libargon2-dev'
         );
 
@@ -90,8 +90,6 @@ libxslt1-dev libmagickwand-dev libsqlite3-dev libonig-dev libwebp-dev libxpm-dev
 --with-fpm-group=www-data \
 --with-libdir=/lib/' . $this->getGccMultiarch() . ' \
 --enable-ftp \
---with-imap \
---with-imap-ssl \
 --with-kerberos \
 --with-gettext \
 --with-libxml \
