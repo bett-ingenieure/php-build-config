@@ -14,4 +14,8 @@ class PHP81Updater extends PHP8Updater {
     protected function getVersion() {
         return 'php-8.1';
     }
+
+    protected function getPeclSwoolePackageName() {
+        return 'swoole-6.1.7';
+    }
 }
