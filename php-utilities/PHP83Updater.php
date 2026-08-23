@@ -8,10 +8,10 @@ class PHP83Updater extends PHP8Updater {
     }
 
     protected function getFpmName() {
-        return 'php83';
+        return $this->getVersion();
     }
 
     protected function getVersion() {
-        return 'php-8.3';
+        return 'php83';
     }
 }

@@ -8,10 +8,10 @@ class PHP82Updater extends PHP8Updater {
     }
 
     protected function getFpmName() {
-        return 'php82';
+        return $this->getVersion();
     }
 
     protected function getVersion() {
-        return 'php-8.2';
+        return 'php82';
     }
 }

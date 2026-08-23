@@ -3,15 +3,15 @@ namespace BettIngenieure\PhpBuildConfig;
 
 class PHP84Updater extends PHP8Updater {
 
-    protected function getSubDirName() {
-        return 'php-84';
-    }
-
-    protected function getFpmName() {
+    protected function getVersion() {
         return 'php84';
     }
 
-    protected function getVersion() {
-        return 'php-8.4';
+    protected function getSubDirName() {
+        return $this->getVersion();
+    }
+
+    protected function getFpmName() {
+        return $this->getVersion();
     }
 }

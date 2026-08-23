@@ -3,22 +3,6 @@ namespace BettIngenieure\PhpBuildConfig;
 
 abstract class PHP8Updater extends PHPUpdater {
 
-    /**
-     * Should be something like php-8, php-80, php-81.
-     *
-     * @return string
-     */
-    abstract protected function getSubDirName();
-
-    abstract protected function getFpmName();
-
-    /**
-     * Used to get download
-     *
-     * @return string
-     */
-    abstract protected function getVersion();
-
     protected function getPHPININame() {
         return 'php8';
     }

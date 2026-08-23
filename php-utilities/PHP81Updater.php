@@ -8,11 +8,11 @@ class PHP81Updater extends PHP8Updater {
     }
 
     protected function getFpmName() {
-        return 'php81';
+        return $this->getVersion();
     }
 
     protected function getVersion() {
-        return 'php-8.1';
+        return 'php81';
     }
 
     protected function getPeclSwoolePackageName() {

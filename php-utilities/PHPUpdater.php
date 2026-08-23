@@ -75,6 +75,10 @@ abstract class PHPUpdater {
 
     abstract protected function getVersion();
 
+    public function getDownloadUrl() {
+        return 'https://config.bett-ingenieure.de/getLatestVersion?target=' . $this->getVersion();
+    }
+
     /**
      * @return string|null
      * @throws ExceptionExec
@@ -86,7 +90,7 @@ abstract class PHPUpdater {
         if(file_exists($this->subDir . 'download')) {
             unlink($this->subDir . 'download');
         }
-        $this->system->exec('wget -O download https://config.bett-ingenieure.de/getLatestVersion?target=' . $this->getVersion() . '.tar.gz');
+        $this->system->exec('wget -O download ' . $this->getDownloadUrl());
 
         $output = $this->system->exec('tar -tzf download 2>&1 | head -1 | cut -f1 -d"/"');
         $target = $output[0];

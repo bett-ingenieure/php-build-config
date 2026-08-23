@@ -30,7 +30,7 @@ class PHP74Updater extends PHPUpdater {
      * @return string
      */
     protected function getVersion() {
-        return 'php-7.4';
+        return 'php74';
     }
 
     /**

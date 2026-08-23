@@ -12,7 +12,7 @@ class PHP80Updater extends PHP8Updater {
     }
 
     protected function getVersion() {
-        return 'php-8.0';
+        return 'php80';
     }
 
     protected function getPeclSwoolePackageName() {
