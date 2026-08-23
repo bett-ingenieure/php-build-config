@@ -1,7 +1,7 @@
 <?php
 namespace BettIngenieure\PhpBuildConfig;
 
-class PHP74Builder extends PHP70BaseBuilder {
+class PHP74Builder extends PHP00BaseBuilder {
 
     /**
      * Should be something like php-8, php-80, php-81.

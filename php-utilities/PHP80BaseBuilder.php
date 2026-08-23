@@ -1,7 +1,7 @@
 <?php
 namespace BettIngenieure\PhpBuildConfig;
 
-abstract class PHP80BaseBuilder extends PHP70BaseBuilder {
+abstract class PHP80BaseBuilder extends PHP00BaseBuilder {
 
     protected function getPHPININame() {
         return 'php8';
