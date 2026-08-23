@@ -1,7 +1,7 @@
 <?php
 namespace BettIngenieure\PhpBuildConfig;
 
-abstract class PHPUpdater {
+abstract class PHP70BaseBuilder {
 
     /**
      * @var Log

@@ -1,10 +1,10 @@
 <?php
 namespace BettIngenieure\PhpBuildConfig;
 
-class PHP81Updater extends PHP8Updater {
+class PHP83Builder extends PHP80BaseBuilder {
 
     protected function getSubDirName() {
-        return 'php-81';
+        return 'php-83';
     }
 
     protected function getFpmName() {
@@ -12,10 +12,6 @@ class PHP81Updater extends PHP8Updater {
     }
 
     protected function getVersion() {
-        return 'php81';
-    }
-
-    protected function getPeclSwoolePackageName() {
-        return 'swoole-6.1.7';
+        return 'php83';
     }
 }

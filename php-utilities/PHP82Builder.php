@@ -1,17 +1,17 @@
 <?php
 namespace BettIngenieure\PhpBuildConfig;
 
-class PHP84Updater extends PHP8Updater {
-
-    protected function getVersion() {
-        return 'php84';
-    }
+class PHP82Builder extends PHP80BaseBuilder {
 
     protected function getSubDirName() {
-        return $this->getVersion();
+        return 'php-82';
     }
 
     protected function getFpmName() {
         return $this->getVersion();
+    }
+
+    protected function getVersion() {
+        return 'php82';
     }
 }

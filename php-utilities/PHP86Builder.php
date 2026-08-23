@@ -1,10 +1,10 @@
 <?php
 namespace BettIngenieure\PhpBuildConfig;
 
-class PHP85Updater extends PHP8Updater {
+class PHP86Builder extends PHP80BaseBuilder {
 
     protected function getVersion() {
-        return 'php85';
+        return 'php86';
     }
 
     protected function getSubDirName() {

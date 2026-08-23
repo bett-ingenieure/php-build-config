@@ -1,7 +1,7 @@
 <?php
 namespace BettIngenieure\PhpBuildConfig;
 
-class PHP80Updater extends PHP8Updater {
+class PHP80Builder extends PHP80BaseBuilder {
 
     protected function getSubDirName() {
         return 'php-8';
