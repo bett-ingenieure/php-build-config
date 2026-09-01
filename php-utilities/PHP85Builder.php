@@ -14,4 +14,8 @@ class PHP85Builder extends PHP80BaseBuilder {
     protected function getFpmName() {
         return $this->getVersion();
     }
+
+    protected function getPHPININame() {
+        return 'php85';
+    }
 }
