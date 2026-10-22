@@ -19,6 +19,8 @@ abstract class PHP81BaseBuilder extends PHP80BaseBuilder {
 
         $binPath = $this->subDir . $version . '/bin';
 
+        chdir($binPath);
+
         $this->system->exec('curl -fL --output ./pie.phar https://github.com/php/pie/releases/latest/download/pie.phar');
 
         if($this->shouldBuildImagickExtensionFromSource()) {
