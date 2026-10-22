@@ -1,7 +1,7 @@
 <?php
 namespace BettIngenieure\PhpBuildConfig;
 
-class PHP85Builder extends PHP80BaseBuilder {
+class PHP85Builder extends PHP81BaseBuilder {
 
     protected function getVersion() {
         return 'php85';
