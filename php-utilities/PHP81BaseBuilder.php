@@ -4,6 +4,12 @@ namespace BettIngenieure\PhpBuildConfig;
 
 abstract class PHP81BaseBuilder extends PHP80BaseBuilder {
 
+    protected function updateDependencies() {
+        parent::updateDependencies();
+
+        $this->system->exec('apt-get install -y curl');
+    }
+
     /**
      * @param string $version
      * @return void
